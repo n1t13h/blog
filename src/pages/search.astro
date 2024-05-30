@@ -1,15 +1,11 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
-import { Image } from "astro:assets";
-
-const posts = (await getCollection("blog")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+import Header from "../components/Header.astro";
+import SearchField from "../components/SearchField.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+const title = "Search | Alex Trost";
+const description = "Search the website of Alex Trost";
 ---
 
 <!doctype html>
@@ -89,28 +85,9 @@ const posts = (await getCollection("blog")).sort(
   <body>
     <Header />
     <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/blog/content/${post.slug}/`}>
-                  <Image
-                    width={720}
-                    height={360}
-                    src={post?.data?.heroImage ?? "/blog-placeholder-1.jpg"}
-                    alt=""
-                  />
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
+      <h1>Search</h1>
+      <hr />
+      <SearchField />
     </main>
     <Footer />
   </body>
